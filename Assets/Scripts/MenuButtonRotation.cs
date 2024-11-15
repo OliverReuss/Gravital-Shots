@@ -5,10 +5,10 @@ using UnityEngine;
 public class MenuButtonRotation : MonoBehaviour
 {
     // Array to store the cubes (starting in the middle and going counter clockwise)
-    public GameObject[] Cubes = new GameObject[4];
+    public GameObject[] Cubes = new GameObject[5];
 
     // Array to store the possible positions (starting in the middle and going counter clockwise)
-    public Vector3[] Positions = { new Vector3(0, 0, 0), new Vector3(2, 0, 2), new Vector3(0, 0, 4), new Vector3(-2, 0, 2) };
+    public Vector3[] Positions = { new Vector3(0, 0, -2), new Vector3(2.3f, 0, -0.5f), new Vector3(1.5f, 0, 2), new Vector3(-1.5f, 0, 2), new Vector3(-2.3f, 0, -0.5f) };
 
     // Left half of the screen (with gap in the middle for the active button)
     Rect leftHalf = new Rect(0, 0, Screen.width / 2 - 100, Screen.height);
