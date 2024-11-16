@@ -781,6 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 632468542}
   smoothTime: 0
+  height: 10
 --- !u!1 &569355590
 GameObject:
   m_ObjectHideFlags: 0
