@@ -23,7 +23,7 @@ public class GravityController : MonoBehaviour
         RaycastHit hitInfo;
 
         // Check if the ray hits any surface within 5 units
-        if (Physics.Raycast(ray, out hitInfo, 5f))
+        if (Physics.Raycast(ray, out hitInfo, 5f) && hitInfo.collider.gameObject.tag != "Shot")
         {
             // Adjust the player's position to stay on the surface
             // The player's position is set to the surface point plus a slight offset to prevent clipping

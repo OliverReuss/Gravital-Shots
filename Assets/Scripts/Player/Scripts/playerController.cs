@@ -13,7 +13,6 @@ public class MovementController : MonoBehaviour
     private float nextFire;
     public int score = 0;
     public GameObject shot;
-    public Transform shotSpawn;
 
     private void Start()
     {
@@ -34,10 +33,11 @@ public class MovementController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
         {
+            // Cooldown for shooting
             nextFire = Time.time + fireRate;
 
-            // Instantiate the shot
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            // Instantiate a shot
+            Instantiate(shot, transform.position, transform.rotation);
         }
     }
 

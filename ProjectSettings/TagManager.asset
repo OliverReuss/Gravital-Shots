@@ -8,6 +8,7 @@ TagManager:
   - Pause Exit Button
   - Corner Pause Button
   - Enemy
+  - Shot
   layers:
   - Default
   - TransparentFX
