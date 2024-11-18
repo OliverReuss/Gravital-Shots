@@ -14,8 +14,7 @@ public class ShowOptions : MonoBehaviour
         if (menuButtonRotation.Cubes[0] == transform.parent.parent.gameObject && Time.time - menuButtonRotation.lastIndexChangeTime > 0.5f)
         {
 
-            // Logic for showing options goes here
-            Debug.Log("Show Options");
+            SceneManager.LoadScene("Options");
         }
     }
 }
