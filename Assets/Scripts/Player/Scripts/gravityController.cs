@@ -10,7 +10,7 @@ public class GravityController : MonoBehaviour
     {
         // Initialize Rigidbody and MovementController references
         rb = GetComponent<Rigidbody>();
-        movementController = GetComponent<MovementController>();
+        movementController = GameObject.FindWithTag("Player").GetComponent<MovementController>();
     }
 
     private void FixedUpdate()
@@ -27,7 +27,7 @@ public class GravityController : MonoBehaviour
         {
             // Adjust the player's position to stay on the surface
             // The player's position is set to the surface point plus a slight offset to prevent clipping
-            transform.position = hitInfo.point + transform.up;
+            transform.position = hitInfo.point + transform.up/2;
 
             // Align the player's rotation to match the surface normal
             Vector3 surfaceNormal = hitInfo.normal;

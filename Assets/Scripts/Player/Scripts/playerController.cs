@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
 
     public float fireRate = 0.25f;
     private float nextFire;
+    public int score = 0;
     public GameObject shot;
     public Transform shotSpawn;
 
@@ -31,9 +32,11 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextFire)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
+
+            // Instantiate the shot
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
         }
     }

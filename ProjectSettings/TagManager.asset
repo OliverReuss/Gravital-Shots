@@ -7,6 +7,7 @@ TagManager:
   - Pause Resume Button
   - Pause Exit Button
   - Corner Pause Button
+  - Enemy
   layers:
   - Default
   - TransparentFX
