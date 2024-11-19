@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     private Vector2 inputVector;
     public float speed = 5f;
     public float rotationSpeed = 100f;
+    public float lives = 3;
 
     public float fireRate = 0.25f;
     private float nextFire;
