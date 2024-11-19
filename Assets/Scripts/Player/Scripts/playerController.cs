@@ -6,8 +6,9 @@ public class MovementController : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput playerInputActions;
     private InputAction move;
-    private Vector2 velocity;
+    private Vector2 inputVector;
     public float speed = 5f;
+    public float rotationSpeed = 100f;
 
     public float fireRate = 0.25f;
     private float nextFire;
@@ -44,27 +45,33 @@ public class MovementController : MonoBehaviour
     private void FixedUpdate()
     {
         // Get movement input as a Vector2 from the input system
-        velocity = move.ReadValue<Vector2>();
+        inputVector = move.ReadValue<Vector2>();
 
-        // Check if there is movement input
-        if (velocity != Vector2.zero)
+        float moveInput = inputVector.y; // W/S for forward/backward
+        float rotationInput = inputVector.x; // A/D for rotation
+
+        // add rotation based on input
+        if (rotationInput != 0)
         {
-            // Create a movement vector based on the input
-            Vector3 movement = new Vector3(velocity.x, 0.0f, velocity.y);
-
-            // Apply movement to the Rigidbody using world-space velocity
-            rb.velocity = transform.TransformDirection(movement * speed);
+            float rotation = rotationInput * rotationSpeed * Time.fixedDeltaTime;
+            transform.Rotate(0, rotation, 0); // Rotate player on Y-axis
         }
+
+        if (moveInput != 0)
+        {
+            Vector3 forwardMovement = transform.forward * moveInput * speed;
+            rb.velocity = forwardMovement; // Move in the player's forward direction
+        }
+
         else
         {
-            // Stop the Rigidbody's movement if no input is detected
-            rb.velocity = Vector3.zero;
+            rb.velocity = Vector3.zero; // Stop movement when no input is given
         }
     }
 
     public Vector3 GetMovementDirection()
     {
         // Return the normalized movement direction vector scaled by speed
-        return new Vector3(velocity.x, 0, velocity.y).normalized * speed;
+        return transform.forward * inputVector.y * speed;
     }
 }
