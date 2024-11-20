@@ -1,47 +1,74 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Unity.IO.LowLevel.Unsafe;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ShotScript : MonoBehaviour
 {
     public float lifetime = 2f;
     public float speed = 5f;
-    private GameObject player;
+    public float shotOffset = 0.5f;
+    public GameObject origin;
+    private Vector3 direction;
+    private Rigidbody rb;
     private MovementController movementController;
     private GameController gameController;
-    private Transform firePoint;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        movementController = player.GetComponent<MovementController>();
-        firePoint = player.GetComponent<Transform>();
-        Collider playerCollider = player.GetComponent<Collider>();
-        Rigidbody rb = GetComponent<Rigidbody>();
+        // Get the rigidbody of the shot
+        rb = GetComponent<Rigidbody>();
+
+        // Get the player movement script to update score
+        movementController = GameObject.FindWithTag("Player").GetComponent<MovementController>();
+
+        // Get the game controller to update the amount of enemies left when a shot destroys one
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
-        // Create a ray from the camera through the mouse position
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // Shoot at the mouse position if the player instantiated the shot
+        if (origin.tag == "Player")
+        {
+            // Create a ray from the camera through the mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        // Determine the target point
-        Vector3 targetPoint = ray.GetPoint(1000f);
+            // Determine the target point
+            Vector3 targetPoint = ray.GetPoint(1000f);
 
-        // Direction from fire point to the target
-        Vector3 direction = (targetPoint - firePoint.position).normalized;
+            // Calculate the initial direction
+            direction = (targetPoint - transform.position).normalized;
 
-        // Set velocity
-        rb.velocity = direction * speed;
+            // Position the shot in front of the player, not at the center
+            transform.position = origin.transform.position + origin.transform.forward * shotOffset;
+        }
+        else
+        {
+            // Keep moving towards the target point
+            direction = transform.forward;
+        }
 
-        // Destroy shot after certain time
+        // Destroy the shot after a certain time
         Destroy(gameObject, lifetime);
+    }
+
+    // Move the shot forward along the surface of the sphere
+    void FixedUpdate()
+    {
+        // Cast a ray downward to find the surface normal
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, 5f))
+        {
+            // Update direction to be tangent to the surface
+            direction = Vector3.ProjectOnPlane(direction, hitInfo.normal).normalized;
+
+            // Move the shot forward
+            transform.position += direction * speed * Time.fixedDeltaTime;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Check if the shot hits something
-        if (other.tag == "Enemy")
+        // Player or drone shooting at enemy
+        if (other.tag == "Enemy" && (origin.tag == "Player" || origin.tag == "Drone"))
         {
             // Update the score
             movementController.score++;
@@ -55,5 +82,25 @@ public class ShotScript : MonoBehaviour
             // Decrease the enemy count
             gameController.DecreaseEnemyCount();
         }
+
+        // Enemy shooting at player
+        if (other.tag == "Player" && origin.tag == "Enemy")
+        {
+            // Destroy the shot
+            Destroy(gameObject);
+
+            // Subract a player life
+        }
+    }
+
+    public void SetOrigin(GameObject o)
+    {
+        origin = o;
+    }
+
+    public void SetTarget(GameObject t)
+    {
+        Vector3 targetPoint = t.GetComponent<Transform>().position;
+        direction = (targetPoint - transform.position).normalized;
     }
 }

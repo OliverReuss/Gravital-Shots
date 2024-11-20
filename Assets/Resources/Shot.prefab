@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2622525684505516586}
   - component: {fileID: 3210374597520275246}
-  - component: {fileID: 7341513427270403660}
+  - component: {fileID: 7481101804240221230}
   - component: {fileID: 5517372405003239721}
   - component: {fileID: 7637599288117116209}
   - component: {fileID: 2692245992268704075}
@@ -64,8 +64,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &7341513427270403660
-CapsuleCollider:
+--- !u!135 &7481101804240221230
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,10 +82,8 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1
-  m_Direction: 2
+  serializedVersion: 3
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5517372405003239721
 MonoBehaviour:
@@ -99,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a97f6de7ff93e4397e5aad6e60acfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
-  speed: 20
-  colliderDelay: 0.5
+  lifetime: 3
+  speed: 15
+  shotOffset: 0.5
+  origin: {fileID: 0}
 --- !u!33 &7637599288117116209
 MeshFilter:
   m_ObjectHideFlags: 0

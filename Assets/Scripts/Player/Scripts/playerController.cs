@@ -14,7 +14,7 @@ public class MovementController : MonoBehaviour
     public float fireRate = 0.25f;
     private float nextFire;
     public int score = 0;
-    public GameObject shot;
+    private GameObject shot;
 
     private void Start()
     {
@@ -27,6 +27,9 @@ public class MovementController : MonoBehaviour
         // Retrieve the movement input action from the Player Input
         move = playerInputActions.Player.Move;
 
+        // Get the shot prefab
+        shot = Resources.Load<GameObject>("Shot");
+
         // Enable the movement input action
         move.Enable();
     }
@@ -38,8 +41,9 @@ public class MovementController : MonoBehaviour
             // Cooldown for shooting
             nextFire = Time.time + fireRate;
 
-            // Instantiate a shot
-            Instantiate(shot, transform.position, transform.rotation);
+            // Instantiate a shot and set this game object as its origin
+            GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
+            newShot.GetComponent<ShotScript>().SetOrigin(gameObject);
         }
     }
 

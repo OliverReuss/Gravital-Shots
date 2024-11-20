@@ -9,6 +9,9 @@ TagManager:
   - Corner Pause Button
   - Enemy
   - Shot
+  - Drone
+  - Stage
+  - ShotSpawn
   layers:
   - Default
   - TransparentFX
