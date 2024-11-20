@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 1409cc7e611561a4d98f854174f95593,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -184,9 +184,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotationSpeed: 100
+  lives: 3
   fireRate: 0.25
   score: 0
-  shot: {fileID: 8541287299235238482, guid: 1872240e604f43e42b12c2c040a6390d, type: 3}
 --- !u!114 &4744472461839517326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,4 +463,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  shot: {fileID: 8541287299235238482, guid: 1872240e604f43e42b12c2c040a6390d, type: 3}

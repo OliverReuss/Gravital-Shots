@@ -1,12 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class ScriptToActivateEscapeButtonHud : MonoBehaviour
 {
     public GameObject HUD;
+
+    private InputAction pauseAction;
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+
+        // Set up the action to listen for the Escape key (or any other key you choose)
+        pauseAction = playerInput.Player.Pause;
+    }
+
+    private void OnEnable()
+    {
+        // Enable the pause action
+        pauseAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Disable the pause action
+        pauseAction.Disable();
+    }
 
     void Start()
     {
@@ -15,8 +36,8 @@ public class ScriptToActivateEscapeButtonHud : MonoBehaviour
 
     void Update()
     {
-        // Check for the Escape key
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Check if the Escape key has been pressed using the new Input System
+        if (pauseAction.triggered)
         {
             Debug.Log("Escape key pressed");
             ToggleHUD(); // Toggle the visibility of the HUD
@@ -28,12 +49,12 @@ public class ScriptToActivateEscapeButtonHud : MonoBehaviour
     {
         if (HUD.activeSelf)
         {
-            Debug.Log("Should be active");
+            Debug.Log("HUD should be hidden");
             HUD.SetActive(false); // Hide the HUD if it’s already active
         }
         else
         {
-            Debug.Log("Should be inactive");
+            Debug.Log("HUD should be visible");
             HUD.SetActive(true); // Show the HUD if it’s inactive
         }
     }

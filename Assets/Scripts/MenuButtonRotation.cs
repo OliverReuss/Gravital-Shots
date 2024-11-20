@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MenuButtonRotation : MonoBehaviour
 {
@@ -27,6 +27,29 @@ public class MenuButtonRotation : MonoBehaviour
     // Activate the button only after a certain time when the cubes were moved
     public float lastIndexChangeTime;
 
+    private InputAction fireAction;
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+
+        // Set up the input action for the mouse click (fire)
+        fireAction = playerInput.Player.Fire;
+    }
+
+    private void OnEnable()
+    {
+        // Enable the fire action
+        fireAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Disable the fire action
+        fireAction.Disable();
+    }
+
     void Start()
     {
         lastIndexChangeTime = Time.time;
@@ -34,15 +57,19 @@ public class MenuButtonRotation : MonoBehaviour
 
     void Update()
     {
-        // Click in the left half of the screen
-        if (Input.GetMouseButtonDown(0) && leftHalf.Contains(Input.mousePosition))
+        // Check if the left mouse button was clicked using the new Input System
+        if (fireAction.triggered)
         {
-            RotateCubesLeft();
-        }
-        // Click in the right half of the screen
-        else if (Input.GetMouseButtonDown(0) && rightHalf.Contains(Input.mousePosition))
-        {
-            RotateCubesRight();
+            // Click in the left half of the screen
+            if (leftHalf.Contains(Mouse.current.position.ReadValue()))
+            {
+                RotateCubesLeft();
+            }
+            // Click in the right half of the screen
+            else if (rightHalf.Contains(Mouse.current.position.ReadValue()))
+            {
+                RotateCubesRight();
+            }
         }
 
         // Make Cubes hover up and down

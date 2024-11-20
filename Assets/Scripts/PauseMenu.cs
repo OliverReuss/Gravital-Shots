@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class HUD : MonoBehaviour
 {
@@ -12,6 +11,29 @@ public class HUD : MonoBehaviour
 
     private bool isPaused = false;
 
+    private InputAction pauseAction;
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+
+        // Set up the action to listen for the Escape key (or any other key you choose)
+        pauseAction = playerInput.Player.Pause;
+    }
+
+    private void OnEnable()
+    {
+        // Enable the pause action
+        pauseAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Disable the pause action
+        pauseAction.Disable();
+    }
+
     private void AttachButtonListener(Button button, UnityEngine.Events.UnityAction action)
     {
         if (button != null)
@@ -19,8 +41,9 @@ public class HUD : MonoBehaviour
     }
 
     void Start()
-    {   // Buttons initial visibility
-        pauseMenuPanel.SetActive(false); 
+    {
+        // Buttons initial visibility
+        pauseMenuPanel.SetActive(false);
         pauseButton.SetActive(true);
 
         // Button listeners
@@ -36,8 +59,8 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
-        // Toggles pause menu with the Escape key
-        if (Input.GetKeyUp(KeyCode.Escape))
+        // Check if the pause button action was triggered (e.g., Escape key press)
+        if (pauseAction.triggered)
         {
             if (isPaused)
                 Resume();
@@ -45,7 +68,6 @@ public class HUD : MonoBehaviour
                 Pause();
         }
     }
-
 
     public void Pause()
     {

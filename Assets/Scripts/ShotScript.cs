@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class ShotScript : MonoBehaviour
@@ -27,7 +28,8 @@ public class ShotScript : MonoBehaviour
         if (origin.tag == "Player")
         {
             // Create a ray from the camera through the mouse position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             // Determine the target point
             Vector3 targetPoint = ray.GetPoint(1000f);
