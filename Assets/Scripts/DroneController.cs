@@ -25,6 +25,12 @@ public class DroneController : MonoBehaviour
             // Calculate the distance between the enemy and the drone
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
+            // Look at the enemy if it is within range
+            if (distance <= range)
+            {
+                transform.LookAt(enemy.transform);
+            }
+
             // Shoot if within range and able to shoot
             if (distance <= range && canShoot)
             {
