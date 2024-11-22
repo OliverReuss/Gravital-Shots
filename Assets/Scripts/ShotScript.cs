@@ -66,7 +66,7 @@ public class ShotScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Player or drone shooting at enemy
-        if (other.tag == "Enemy" && (origin.tag == "Player" || origin.tag == "Drone"))
+        if (other.tag == "Enemy" && origin != null && (origin.tag == "Player" || origin.tag == "Drone"))
         {
             // Update the score
             movementController.score++;
@@ -75,11 +75,11 @@ public class ShotScript : MonoBehaviour
             Destroy(gameObject);
 
             // Invoke enemy hit function
-            other.GetComponent<EnemyController>().HitRecieved();
+            other.GetComponent<EnemyController>().HitRecieved(origin);
         }
 
         // Enemy shooting at player
-        if (other.tag == "Player" && origin.tag == "Enemy")
+        if (other.tag == "Player" && origin != null && origin.tag == "Enemy")
         {
             // Destroy the shot
             Destroy(gameObject);

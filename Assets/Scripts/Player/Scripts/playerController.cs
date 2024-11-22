@@ -17,6 +17,10 @@ public class MovementController : MonoBehaviour
     private InputAction movement;
     private PlayerInput playerInput;
 
+    //PowerUp
+    public bool isPoweredUp = false; //check if player picked up power-up
+    public float powerUpDuration = 10f; // Duration of the power-up
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -51,6 +55,11 @@ public class MovementController : MonoBehaviour
         // Initialize movement input action
         move = playerInput.Player.Move;
         move.Enable();
+    }
+
+    private void Update()
+    {
+        // You no longer need to handle shooting here, as it’s handled by the input system
     }
 
     private void FixedUpdate()
@@ -96,5 +105,18 @@ public class MovementController : MonoBehaviour
             GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
             newShot.GetComponent<ShotScript>().SetOrigin(gameObject); // Set this game object as the shot's origin
         }
+    }
+
+    public void UpgradeLaser()
+    {
+        isPoweredUp = true;
+        Debug.Log("Power-Up Activated");
+        Invoke(nameof(ResetPowerUp), powerUpDuration);
+    }
+
+    private void ResetPowerUp()
+    {
+        isPoweredUp = false;
+        Debug.Log("Power-Up Deactivated");
     }
 }

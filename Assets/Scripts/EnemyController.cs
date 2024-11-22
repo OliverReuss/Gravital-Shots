@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnemyController : MonoBehaviour
@@ -73,16 +73,24 @@ public class EnemyController : MonoBehaviour
         canShoot = true;
     }
 
-    public void HitRecieved()
+    public void HitRecieved(GameObject attacker)
     {
-        lives--;
+        MovementController movementController = attacker.GetComponent<MovementController>();
+
+        if (movementController != null && movementController.isPoweredUp)
+        {
+            // Instantly destroy the enemy when the player is powered up
+            lives = 0;
+        }
+        else
+        {
+            // Reduce the enemy's lives normally
+            lives--;
+        }
 
         if (lives <= 0)
         {
-            // Destroy the enemy
             Destroy(gameObject);
-
-            // Decrease the enemy count
             gameController.DecreaseEnemyCount();
         }
     }
