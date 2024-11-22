@@ -12,6 +12,7 @@ TagManager:
   - Drone
   - Stage
   - ShotSpawn
+  - Cube Obstacle
   layers:
   - Default
   - TransparentFX
