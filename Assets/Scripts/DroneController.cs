@@ -4,14 +4,19 @@ using System.Collections;
 public class DroneController : MonoBehaviour
 {
     public float range = 5f;
+    public float rotationSpeed = 2f; // Speed of rotation towards the enemy
     private GameObject shot;
     private GameObject[] enemies;
     private bool canShoot = true;
+    private Transform playerTransform;
 
     private void Start()
     {
         // Get the shot prefab
         shot = Resources.Load<GameObject>("Shot");
+
+        // Find the player in the scene and reference its transform
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update()
@@ -19,25 +24,43 @@ public class DroneController : MonoBehaviour
         // Update the array to always contain the current remaining enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        bool enemyInRange = false;
+
         // Check for each enemy if it is within range of the drone
         foreach (GameObject enemy in enemies)
         {
             // Calculate the distance between the enemy and the drone
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            // Look at the enemy if it is within range
+            // Rotate towards the enemy if it is within range
             if (distance <= range)
             {
-                transform.LookAt(enemy.transform);
-            }
+                enemyInRange = true;
 
-            // Shoot if within range and able to shoot
-            if (distance <= range && canShoot)
-            {
-                // Only fire at one enemy at a time
-                StartCoroutine(FireShot(enemy));
-                break;
+                // Calculate the rotation step
+                Vector3 directionToEnemy = enemy.transform.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(directionToEnemy);
+
+                // Smoothly rotate towards the enemy
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+                // Shoot if within range and able to shoot
+                if (canShoot)
+                {
+                    StartCoroutine(FireShot(enemy));
+                    break;
+                }
             }
+        }
+
+        // If no enemy is within range, rotate back to face the player's forward direction
+        if (!enemyInRange)
+        {
+            // Calculate the rotation to face the player's forward direction
+            Quaternion targetRotation = Quaternion.LookRotation(playerTransform.forward);
+
+            // Smoothly rotate towards the player's forward direction
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 

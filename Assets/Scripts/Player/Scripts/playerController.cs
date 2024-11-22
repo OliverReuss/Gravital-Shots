@@ -53,11 +53,6 @@ public class MovementController : MonoBehaviour
         move.Enable();
     }
 
-    private void Update()
-    {
-        // You no longer need to handle shooting here, as it’s handled by the input system
-    }
-
     private void FixedUpdate()
     {
         // Handle player movement based on input values
