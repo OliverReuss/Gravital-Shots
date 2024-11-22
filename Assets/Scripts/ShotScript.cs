@@ -11,7 +11,6 @@ public class ShotScript : MonoBehaviour
     private Vector3 direction;
     private Rigidbody rb;
     private MovementController movementController;
-    private GameController gameController;
 
     void Start()
     {
@@ -20,9 +19,6 @@ public class ShotScript : MonoBehaviour
 
         // Get the player movement script to update score
         movementController = GameObject.FindWithTag("Player").GetComponent<MovementController>();
-
-        // Get the game controller to update the amount of enemies left when a shot destroys one
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
         // Shoot at the mouse position if the player instantiated the shot
         if (origin.tag == "Player")
@@ -78,11 +74,8 @@ public class ShotScript : MonoBehaviour
             // Destroy the shot
             Destroy(gameObject);
 
-            // Destroy the enemy
-            Destroy(other.gameObject);
-
-            // Decrease the enemy count
-            gameController.DecreaseEnemyCount();
+            // Invoke enemy hit function
+            other.GetComponent<EnemyController>().HitRecieved();
         }
 
         // Enemy shooting at player

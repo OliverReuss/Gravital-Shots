@@ -1,19 +1,22 @@
-using UnityEngine;
+ using UnityEngine;
 using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
     public float speed = 5f;
-    private GameObject player;
-    private Rigidbody rb;
-
-    // Shooting
+    public float lives = 2f;
     public float range = 5f;
-    private GameObject shot;
     private bool canShoot = true;
+    private GameObject player;
+    private GameObject shot;
+    private Rigidbody rb;
+    private GameController gameController;
 
     void Start()
     {
+        // Get the game controller to update the amount of enemies left when a shot destroys one
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
         shot = Resources.Load<GameObject>("Shot");
@@ -68,5 +71,19 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         canShoot = true;
+    }
+
+    public void HitRecieved()
+    {
+        lives--;
+
+        if (lives <= 0)
+        {
+            // Destroy the enemy
+            Destroy(gameObject);
+
+            // Decrease the enemy count
+            gameController.DecreaseEnemyCount();
+        }
     }
 }
