@@ -23,7 +23,6 @@ public class ParticleController : MonoBehaviour
             if (!engineParticles.isPlaying) // Only play if not already playing
             {
                 engineParticles.Play();
-                Debug.Log("Play");
             }
         }
         // Stop particles when moving backward or not moving forward
@@ -32,7 +31,6 @@ public class ParticleController : MonoBehaviour
             if (engineParticles.isPlaying) // Only stop if it's playing
             {
                 engineParticles.Stop();
-                Debug.Log("Stop");
             }
         }
     }

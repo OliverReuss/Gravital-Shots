@@ -11,7 +11,7 @@ public class ObstacleCollision : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject livesManager;
 
-    private MeshCollider playerMeshCollider;
+    private CapsuleCollider playerCapsuleCollider;
     private float cooldown = 5f;
     private bool isCooldownActive = false;
 
@@ -23,8 +23,8 @@ public class ObstacleCollision : MonoBehaviour
 
         if (player != null)
         {
-            playerMeshCollider = player.GetComponent<MeshCollider>();
-            if (playerMeshCollider == null)
+            playerCapsuleCollider = player.GetComponent<CapsuleCollider>();
+            if (playerCapsuleCollider == null)
             {
                 Debug.LogError("No Rigidbody component found on the player.");
             }

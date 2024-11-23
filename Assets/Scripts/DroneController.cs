@@ -4,7 +4,7 @@ using System.Collections;
 public class DroneController : MonoBehaviour
 {
     public float range = 5f;
-    public float rotationSpeed = 2f; // Speed of rotation towards the enemy
+    public float rotationSpeed = 2f;
     private GameObject shot;
     private GameObject[] enemies;
     private bool canShoot = true;

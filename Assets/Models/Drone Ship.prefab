@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33652021309507874}
   - component: {fileID: 23921599294584474}
   m_Layer: 0
-  m_Name: Dropship_R35
+  m_Name: Drone Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
