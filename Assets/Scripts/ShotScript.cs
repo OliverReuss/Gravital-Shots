@@ -64,29 +64,42 @@ public class ShotScript : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other)
+{
+    // Player or drone shooting at enemy
+    if (other.tag == "Enemy" && origin != null && (origin.tag == "Player" || origin.tag == "Drone"))
     {
-        // Player or drone shooting at enemy
-        if (other.tag == "Enemy" && origin != null && (origin.tag == "Player" || origin.tag == "Drone"))
+        // Update the score
+        movementController.score++;
+
+        // Destroy the shot
+        Destroy(gameObject);
+
+        // Check if the other object has an EnemyController
+        var enemyController = other.GetComponent<EnemyController>();
+        if (enemyController != null)
         {
-            // Update the score
-            movementController.score++;
-
-            // Destroy the shot
-            Destroy(gameObject);
-
-            // Invoke enemy hit function
-            other.GetComponent<EnemyController>().HitRecieved(origin);
+            enemyController.HitRecieved(origin);
         }
-
-        // Enemy shooting at player
-        if (other.tag == "Player" && origin != null && origin.tag == "Enemy")
+        else
         {
-            // Destroy the shot
-            Destroy(gameObject);
-
-            // Subract a player life
+            // Check for StationaryEnemyController
+            var stationaryEnemyController = other.GetComponent<StationaryEnemyController>();
+            if (stationaryEnemyController != null)
+            {
+                stationaryEnemyController.HitRecieved(origin);
+            }
         }
     }
+
+    // Enemy shooting at player
+    if (other.tag == "Player" && origin != null && origin.tag == "Enemy")
+    {
+        // Destroy the shot
+        Destroy(gameObject);
+
+        // Subtract a player life
+    }
+}
 
     public void SetOrigin(GameObject o)
     {
