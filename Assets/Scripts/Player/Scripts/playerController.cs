@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     public float speed = 5f;
     public float rotationSpeed = 100f;
     public float fireRate = 0.25f;
+    public int lives = 3;
     public int score = 0;
     private float nextFire;
     public GameObject shot;
@@ -59,11 +60,6 @@ public class MovementController : MonoBehaviour
         // Initialize movement input action
         move = playerInput.Player.Move;
         move.Enable();
-    }
-
-    private void Update()
-    {
-        // You no longer need to handle shooting here, as it’s handled by the input system
     }
 
     private void FixedUpdate()
