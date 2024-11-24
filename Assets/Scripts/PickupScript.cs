@@ -4,11 +4,10 @@ public class PickupScript : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Power Up was triggered");
-        Debug.Log(other.tag);
-
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Power Up was triggered");
+
             MovementController movementController = other.GetComponent<MovementController>();
 
             if (movementController != null)

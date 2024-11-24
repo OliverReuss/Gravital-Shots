@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 388595361943896611}
   - component: {fileID: 7715237801790881288}
   m_Layer: 0
-  m_Name: Enemy (moving towards player)
+  m_Name: Stage2Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529e32032253bc843addbc95c6557811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   lives: 2
-  range: 5
+  shootingRange: 5
+  detectionRange: 15

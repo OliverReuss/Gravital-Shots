@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour
+public class Stage1EnemyScript : MonoBehaviour
 {
     public float speed = 5f;
     public float lives = 2f;
-    public float range = 5f;
+    public float shootingRange = 10f;
     private bool canShoot = true;
     private GameObject player;
     private GameObject shot;
@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
     {
         // Get the game controller to update the amount of enemies left when a shot destroys one
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
         shot = Resources.Load<GameObject>("Shot");
@@ -24,37 +23,18 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        // Calculate the direction to the player
-        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
-
         // Calculate a forward direction that is aligned with the current rotation
-        Vector3 forward = Vector3.ProjectOnPlane(directionToPlayer, transform.up).normalized;
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, transform.up).normalized;
 
-        // Align the enemy to face the player, keeping the current surface alignment
-        if (forward.magnitude > 0.1f)
+        // Always move forward
+        transform.position += forward * speed * Time.deltaTime;
+
+        // Shooting
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+
+        if (distance <= shootingRange && canShoot)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(forward, transform.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-        }
-
-        // Move towards the player if they are out of range
-        if (Vector3.Distance(transform.position, player.transform.position) > range)
-        {
-            transform.position += forward * speed * Time.deltaTime;
-        }
-        else
-        {
-            // Stop the enemy from drifting away from the player
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            // Shooting
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-
-            if (distance <= range && canShoot)
-            {
-                StartCoroutine(FireShot(player));
-            }
+            StartCoroutine(FireShot(player));
         }
     }
 

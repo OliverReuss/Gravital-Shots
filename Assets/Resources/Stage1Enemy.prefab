@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1d6c3b0330f9f404dbb79cea6baee44f,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (moving around)
+      value: Stage1Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1d6c3b0330f9f404dbb79cea6baee44f,
         type: 3}
@@ -99,6 +99,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6933764719221994970}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d6c3b0330f9f404dbb79cea6baee44f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3967455991151589235}
   m_SourcePrefab: {fileID: 100100000, guid: 1d6c3b0330f9f404dbb79cea6baee44f, type: 3}
 --- !u!1 &2711700404977886069 stripped
 GameObject:
@@ -121,7 +125,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -168,3 +172,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd882451add0e94ea6249fa2514e430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3967455991151589235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711700404977886069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f0a16c7edfefc48b9bc041ccb4f5d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  lives: 2
+  shootingRange: 5

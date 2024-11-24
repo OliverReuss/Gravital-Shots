@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class ShotScript : MonoBehaviour
@@ -35,6 +36,10 @@ public class ShotScript : MonoBehaviour
 
             // Position the shot in front of the player, not at the center
             transform.position = origin.transform.position + origin.transform.forward * shotOffset;
+        }
+        else if(origin.tag == "Enemy" && SceneManager.GetActiveScene().name == "Stage1")
+        {
+            // Do nothing to keep the shot direction aimed to the player
         }
         else
         {
@@ -75,19 +80,21 @@ public class ShotScript : MonoBehaviour
         Destroy(gameObject);
 
         // Check if the other object has an EnemyController
-        var enemyController = other.GetComponent<EnemyController>();
-        if (enemyController != null)
+        if (SceneManager.GetActiveScene().name == "Stage1")
         {
+             var enemyController = other.GetComponent<Stage1EnemyScript>();
+             enemyController.HitRecieved(origin);
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            var enemyController = other.GetComponent<EnemyController>();
             enemyController.HitRecieved(origin);
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Stage3")
         {
             // Check for StationaryEnemyController
             var stationaryEnemyController = other.GetComponent<StationaryEnemyController>();
-            if (stationaryEnemyController != null)
-            {
-                stationaryEnemyController.HitRecieved(origin);
-            }
+            stationaryEnemyController.HitRecieved(origin);
         }
     }
 
