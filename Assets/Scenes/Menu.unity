@@ -265,6 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 8300000, guid: ecdb932173fe9e74a9d02579476ce930, type: 3}
   stage1Music: {fileID: 8300000, guid: b2a60acb889edd240ac314ba26dbb3de, type: 3}
+  stage2Music: {fileID: 8300000, guid: 88062c9ec0eecbc43b19e703d784438c, type: 3}
+  stage3Music: {fileID: 8300000, guid: 0975a6280239c014cab650c0a74df2b0, type: 3}
 --- !u!1001 &219723864
 PrefabInstance:
   m_ObjectHideFlags: 0

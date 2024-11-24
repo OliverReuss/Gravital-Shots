@@ -490,6 +490,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 6122840087003472819, guid: bddee3c777101d84b9f72d7809b26568,
+        type: 3}
+      propertyPath: stage2Music
+      value: 
+      objectReference: {fileID: 8300000, guid: 88062c9ec0eecbc43b19e703d784438c, type: 3}
+    - target: {fileID: 6122840087003472819, guid: bddee3c777101d84b9f72d7809b26568,
+        type: 3}
+      propertyPath: stage3Music
+      value: 
+      objectReference: {fileID: 8300000, guid: 0975a6280239c014cab650c0a74df2b0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

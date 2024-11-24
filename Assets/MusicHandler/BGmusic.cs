@@ -11,6 +11,8 @@ public class BGmusic : MonoBehaviour
 
     public AudioClip menuMusic;
     public AudioClip stage1Music;
+    public AudioClip stage2Music;
+    public AudioClip stage3Music;
 
     void Awake()
     {
@@ -52,11 +54,24 @@ public class BGmusic : MonoBehaviour
         {
             PlayMusic(stage1Music);
         }
+
+        else if (newScene.name == "Stage2" && stage2Music != null)
+        {
+            PlayMusic(stage2Music);
+        }
+
+        else if (newScene.name == "Stage3" && stage3Music != null)
+        {
+            PlayMusic(stage3Music);
+        }
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        if (audioSource.clip == clip) return; // Prevent restarting the same clip
+        if (audioSource.clip == clip)
+        {
+            return; // Prevent restarting the same clip
+        }
 
         audioSource.Stop();
         audioSource.clip = clip;
