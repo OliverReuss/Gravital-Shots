@@ -113,6 +113,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     public void UpgradeLaser()
     {
         isPoweredUp = true;
@@ -126,3 +127,6 @@ public class MovementController : MonoBehaviour
         Debug.Log("Power-Up Deactivated");
     }
 }
+=======
+}
+>>>>>>> Stashed changes

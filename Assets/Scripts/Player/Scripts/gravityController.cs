@@ -25,26 +25,28 @@ public class GravityController : MonoBehaviour
         // Check if the ray hits any surface within 5 units
         if (Physics.Raycast(ray, out hitInfo, 5f) && hitInfo.collider.gameObject.tag != "Shot" && hitInfo.collider.gameObject.tag != "Player" && hitInfo.collider.gameObject.tag != "Cube Obstacle")
         {
-            // Adjust the player's position to stay on the surface
-            // The player's position is set to the surface point plus a slight offset to prevent clipping
-            transform.position = hitInfo.point + transform.up/2;
+            if (!IsNearObstacle()) {
+                // Adjust the player's position to stay on the surface
+                // The player's position is set to the surface point plus a slight offset to prevent clipping
+                transform.position = hitInfo.point + transform.up/2;
 
-            // Align the player's rotation to match the surface normal
-            Vector3 surfaceNormal = hitInfo.normal;
+                // Align the player's rotation to match the surface normal
+                Vector3 surfaceNormal = hitInfo.normal;
 
-            // Calculate the forward direction relative to the surface
-            Vector3 forward = Vector3.ProjectOnPlane(transform.forward, surfaceNormal).normalized;
+                // Calculate the forward direction relative to the surface
+                Vector3 forward = Vector3.ProjectOnPlane(transform.forward, surfaceNormal).normalized;
 
-            // If the forward direction has a valid magnitude, align the player's rotation smoothly
-            if (forward.magnitude > 0.1f)
-            {
-                // Smoothly interpolate the player's rotation to match the target
-                Quaternion targetRotation = Quaternion.LookRotation(forward, surfaceNormal);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                // If the forward direction has a valid magnitude, align the player's rotation smoothly
+                if (forward.magnitude > 0.1f)
+                {
+                    // Smoothly interpolate the player's rotation to match the target
+                    Quaternion targetRotation = Quaternion.LookRotation(forward, surfaceNormal);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                }
+
+                // Update the last known valid position
+                lastKnownPos = transform.position;
             }
-
-            // Update the last known valid position
-            lastKnownPos = transform.position;
         }
         else
         {
@@ -54,5 +56,19 @@ public class GravityController : MonoBehaviour
                 transform.position = lastKnownPos;
             }
         }
+    }
+
+    bool IsNearObstacle()//Dan
+    {
+        //checks for colliders 
+        Collider[] obstacles = Physics.OverlapSphere(transform.position, 1f);
+        foreach (var obstacle in obstacles)
+        {
+            if (obstacle.CompareTag("Cube Obstacle")) // Filter by tag
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

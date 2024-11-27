@@ -3,71 +3,53 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
-
 public class ObstacleCollision : MonoBehaviour
 {
-    [SerializeField] private GameObject obstacle;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject livesManager;
 
-    private CapsuleCollider playerCapsuleCollider;
     private float cooldown = 5f;
     private bool isCooldownActive = false;
 
-    void Start()
+    private void Start()
     {
-
-        // check for null references
-        
-
-        if (player != null)
-        {
-            playerCapsuleCollider = player.GetComponent<CapsuleCollider>();
-            if (playerCapsuleCollider == null)
-            {
-                Debug.LogError("No Rigidbody component found on the player.");
-            }
-        }
-        else
+        if (player == null)
         {
             Debug.LogError("Player GameObject is not assigned.");
         }
-        if (livesManager != null) { }
-        else
+        if (livesManager == null)
         {
-            Debug.LogError("LivesManager not assigned");
+            Debug.LogError("LivesManager is not assigned.");
         }
-
-        
     }
 
-    void Update()
+    private void Update()
     {
-        
         if (isCooldownActive)
         {
             cooldown -= Time.deltaTime;
-
             if (cooldown <= 0)
             {
-                cooldown = 5f; // Reset cooldown
+                cooldown = 10f; // Reset cooldown
                 isCooldownActive = false;
             }
         }
-        
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject == player && !isCooldownActive)
-        {
-            Debug.Log("IS COLLIDING");
-            isCooldownActive = true;
-            //
-            livesManager.SendMessage("ReduceLives", SendMessageOptions.DontRequireReceiver);
+        if (!isCooldownActive) { 
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                HandlePlayerCollision();
+            }
         }
     }
 
-    
+    private void HandlePlayerCollision()
+    {
+        Debug.Log("Player collision detected.");
+        livesManager.SendMessage("ReduceLives", 1);
+        isCooldownActive = true;
+    }
 }
