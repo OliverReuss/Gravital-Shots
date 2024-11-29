@@ -10,18 +10,12 @@ public class MovementController : MonoBehaviour
     public float speed = 5f;
     public float rotationSpeed = 100f;
     public float fireRate = 0.25f;
-    public int lives = 3;
     public int score = 0;
     private float nextFire;
     public GameObject shot;
 
     private InputAction movement;
     private PlayerInput playerInput;
-    private AudioSource audioSource;
-
-    //PowerUp
-    public bool isPoweredUp = false; //check if player picked up power-up
-    public float powerUpDuration = 10f; // Duration of the power-up
 
     private void Awake()
     {
@@ -53,9 +47,6 @@ public class MovementController : MonoBehaviour
 
         // Get the shot prefab from Resources
         shot = Resources.Load<GameObject>("Shot");
-
-        //Get Audio Source
-        audioSource = GetComponent<AudioSource>();
 
         // Initialize movement input action
         move = playerInput.Player.Move;
@@ -104,29 +95,6 @@ public class MovementController : MonoBehaviour
             // Instantiate the shot and set the player's position and rotation
             GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
             newShot.GetComponent<ShotScript>().SetOrigin(gameObject); // Set this game object as the shot's origin
-
-            //Play shooting sound
-            if (audioSource != null)
-            {
-                audioSource.Play();
-            }
         }
     }
-
-<<<<<<< Updated upstream
-    public void UpgradeLaser()
-    {
-        isPoweredUp = true;
-        Debug.Log("Power-Up Activated");
-        Invoke(nameof(ResetPowerUp), powerUpDuration);
-    }
-
-    private void ResetPowerUp()
-    {
-        isPoweredUp = false;
-        Debug.Log("Power-Up Deactivated");
-    }
 }
-=======
-}
->>>>>>> Stashed changes
