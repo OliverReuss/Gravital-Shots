@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd738242f2420094297764b485fb3eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 539828523}
+  player: {fileID: 176691137}
   livesManager: {fileID: 777079730}
 --- !u!1 &170852240
 GameObject:
@@ -1426,7 +1426,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9050181524048796541, guid: 6cab339097caeae41a2cc0187ec48d11,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 777079736}
   m_SourcePrefab: {fileID: 100100000, guid: 6cab339097caeae41a2cc0187ec48d11, type: 3}
 --- !u!1 &777079730 stripped
 GameObject:
@@ -2358,6 +2362,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gameover Lose Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3637136561339009045, guid: 2fe5ff771f4deb740be0113d9d13c042,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6058078695254334989, guid: 2fe5ff771f4deb740be0113d9d13c042,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2888,80 +2897,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9571b95bdfcb4644b992aff2b3458a9a, type: 3}
---- !u!1001 &2021030101
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5224472796809856902, guid: 3f6d0f9b91854ce448b1d37f17b993af,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5513377289364194876, guid: 3f6d0f9b91854ce448b1d37f17b993af,
-    - target: {fileID: 4073450097719070767, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_Name
-      value: PostProcessing
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8274238
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.56157804
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452522907583540128, guid: 3ab44806f486753438a7985a92135863,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 68.33
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3ab44806f486753438a7985a92135863, type: 3}
 --- !u!1001 &1956548862791400161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3027,42 +2962,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6122840087003472819, guid: bddee3c777101d84b9f72d7809b26568,
         type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2852758803385250949}
-  m_SourcePrefab: {fileID: 100100000, guid: 3f6d0f9b91854ce448b1d37f17b993af, type: 3}
---- !u!1 &2852758803385250948 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5513377289364194876, guid: 3f6d0f9b91854ce448b1d37f17b993af,
-    type: 3}
-  m_PrefabInstance: {fileID: 2852758803385250947}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2852758803385250949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2852758803385250948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd738242f2420094297764b485fb3eb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 539828523}
-  livesManager: {fileID: 777079730}
-      propertyPath: stage2Music
+      propertyPath: 
       value: 
-      objectReference: {fileID: 8300000, guid: 88062c9ec0eecbc43b19e703d784438c, type: 3}
-    - target: {fileID: 6122840087003472819, guid: bddee3c777101d84b9f72d7809b26568,
-        type: 3}
-      propertyPath: stage3Music
-      value: 
-      objectReference: {fileID: 8300000, guid: 0975a6280239c014cab650c0a74df2b0, type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bddee3c777101d84b9f72d7809b26568, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6d0f9b91854ce448b1d37f17b993af, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3075,7 +2982,6 @@ SceneRoots:
   - {fileID: 1968347663}
   - {fileID: 777079729}
   - {fileID: 1625713123}
-  - {fileID: 2021030101}
   - {fileID: 629338307}
   - {fileID: 1629302088}
   - {fileID: 1184511913}
@@ -3087,3 +2993,4 @@ SceneRoots:
   - {fileID: 1632484482}
   - {fileID: 1003850938}
   - {fileID: 1986304238}
+  - {fileID: 264688023}
