@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1466517444932558182}
   - component: {fileID: 7115685259225832230}
   - component: {fileID: 3842674494463697590}
+  - component: {fileID: 5185678232102119993}
   m_Layer: 5
   m_Name: Gameover Lose Canvas
   m_TagString: Untagged
@@ -238,6 +239,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5185678232102119993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637136561339009045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affe038e7d5f9404894542db788e3124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 3637136561339009045}
 --- !u!1 &6290244036901046074
 GameObject:
   m_ObjectHideFlags: 0

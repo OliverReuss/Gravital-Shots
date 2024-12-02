@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
     private Rigidbody rb;
     private InputAction move;
     private Vector2 inputVector;
-    public float speed = 5f;
+    public float speed = 10f;
     public float rotationSpeed = 100f;
     public float fireRate = 0.25f;
     public int score = 0;

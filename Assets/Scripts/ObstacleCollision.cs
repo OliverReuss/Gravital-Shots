@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,8 +6,10 @@ public class ObstacleCollision : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject livesManager;
+    [SerializeField] private float cooldown = 35f; // Cooldown duration
+    [SerializeField] private string[] validTags = { "Player" }; // Tags to check against
 
-    private float cooldown = 5f;
+    private Lives livesScript;
     private bool isCooldownActive = false;
 
     private void Start()
@@ -21,35 +22,44 @@ public class ObstacleCollision : MonoBehaviour
         {
             Debug.LogError("LivesManager is not assigned.");
         }
-    }
-
-    private void Update()
-    {
-        if (isCooldownActive)
+        else
         {
-            cooldown -= Time.deltaTime;
-            if (cooldown <= 0)
+            livesScript = livesManager.GetComponent<Lives>();
+            if (livesScript == null)
             {
-                cooldown = 10f; // Reset cooldown
-                isCooldownActive = false;
+                Debug.LogError("Lives script is not found on the LivesManager.");
             }
         }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (!isCooldownActive) { 
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                HandlePlayerCollision();
-            }
+        if (!isCooldownActive && collision.gameObject.CompareTag("Player"))
+        {
+            HandlePlayerCollision();
         }
     }
 
     private void HandlePlayerCollision()
     {
         Debug.Log("Player collision detected.");
-        livesManager.SendMessage("ReduceLives", 1);
-        isCooldownActive = true;
+        if (livesScript != null)
+        {
+            livesScript.ReduceLives(1); // Call method directly
+            StartCoroutine(CollisionCooldown());
+        }
+        else
+        {
+            Debug.LogError("Cannot reduce lives; Lives script is missing.");
+        }
     }
+
+    private IEnumerator CollisionCooldown()
+    {
+        isCooldownActive = true;
+        yield return new WaitForSeconds(cooldown);
+        isCooldownActive = false;
+    }
+
+    
 }
