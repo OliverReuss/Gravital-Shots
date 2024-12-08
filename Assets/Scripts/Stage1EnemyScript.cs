@@ -72,6 +72,11 @@ public class Stage1EnemyScript : MonoBehaviour
         {
             Destroy(gameObject);
             gameController.DecreaseEnemyCount();
+
+            //if (gameController.GetEnemyCount() == 0)
+            //{
+            //    scene changer
+            //}
         }
     }
 }

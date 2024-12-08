@@ -12,6 +12,7 @@ public class ShotScript : MonoBehaviour
     private Vector3 direction;
     private Rigidbody rb;
     private MovementController movementController;
+    [SerializeField] private Lives lives;
 
     void Start()
     {
@@ -21,8 +22,14 @@ public class ShotScript : MonoBehaviour
         // Get the player movement script to update score
         movementController = GameObject.FindWithTag("Player").GetComponent<MovementController>();
 
-        // Shoot at the mouse position if the player instantiated the shot
-        if (origin.tag == "Player")
+        if (lives == null)
+        {
+            Debug.LogError("LIVES NOT LOADED");
+        }
+
+
+            // Shoot at the mouse position if the player instantiated the shot
+            if (origin.tag == "Player")
         {
             // Create a ray from the camera through the mouse position
             // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -70,6 +77,12 @@ public class ShotScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
 {
+    if (origin != null && origin.CompareTag("Player") && other.CompareTag("Player"))
+    {
+        Debug.Log("Ignoring player's bullet");
+        return;
+    }
+
     // Player or drone shooting at enemy
     if (other.tag == "Enemy" && origin != null && (origin.tag == "Player" || origin.tag == "Drone"))
     {
@@ -83,18 +96,27 @@ public class ShotScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Stage1")
         {
              var enemyController = other.GetComponent<Stage1EnemyScript>();
-             enemyController.HitRecieved(origin);
+             if (enemyController != null)
+             {
+                 enemyController.HitRecieved(origin);
+             }
         }
         else if (SceneManager.GetActiveScene().name == "Stage2")
         {
             var enemyController = other.GetComponent<EnemyController>();
-            enemyController.HitRecieved(origin);
+            if (enemyController != null)
+            {
+                enemyController.HitRecieved(origin);
+            }
         }
         else if (SceneManager.GetActiveScene().name == "Stage3")
         {
             // Check for StationaryEnemyController
             var stationaryEnemyController = other.GetComponent<StationaryEnemyController>();
-            stationaryEnemyController.HitRecieved(origin);
+            if (stationaryEnemyController != null)
+            {
+                stationaryEnemyController.HitRecieved(origin);
+            }
         }
     }
 
@@ -104,8 +126,16 @@ public class ShotScript : MonoBehaviour
         // Destroy the shot
         Destroy(gameObject);
 
-        // Subtract a player life
-    }
+            var playerLives = other.GetComponent<Lives>();
+            if (playerLives != null)
+            {
+                playerLives.ReduceLives(1);
+            }
+            else
+            {
+                Debug.LogError("Player does not have a Lives script!");
+            }
+        }
 }
 
     public void SetOrigin(GameObject o)

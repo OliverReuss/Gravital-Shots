@@ -59,7 +59,7 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
-        // Check if the pause button action was triggered (e.g., Escape key press)
+        // Check if the pause button action was triggered
         if (pauseAction.triggered)
         {
             if (isPaused)

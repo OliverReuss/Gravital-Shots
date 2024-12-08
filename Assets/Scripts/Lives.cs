@@ -1,72 +1,81 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lives : MonoBehaviour
 {
     [SerializeField] private GameObject HUD;
-    [SerializeField] private int lives = 3;
+    [SerializeField] private GameObject gameOverUI; // Reference to the GameOverUIController
+    [SerializeField] private GameoverScreenScript script;
+    [SerializeField] private int lives;//change for player's lives
 
     private TMP_Text livesText;
-    // Start is called before the first frame update
-    void Start()
+
+    private float cooldown = 5f;
+    private bool isCooldownActive = false;
+
+    private void Start()
     {
-        if (HUD != null)
-        {
-            livesText = HUD.GetComponentInChildren<TMP_Text>();
-            if (livesText == null)
-            {
-                Debug.LogError("No TMP_Text component found in HUD's children.");
-            }
-        }
-        else
+        if (HUD == null)
         {
             Debug.LogError("HUD GameObject is not assigned.");
+            return;
         }
-        livesText.SetText($"Lives: {lives}");
-    }
 
-    // Update is called once per frame
-    void Update()
+        livesText = HUD.GetComponentInChildren<TMP_Text>();
+        if (livesText == null)
+        {
+            Debug.LogError("No TMP_Text component found in HUD's children.");
+        }
+        if (gameOverUI == null)
+        { 
+            Debug.LogError("Gameover Lose Canvas GameObject not found.");
+        }
+
+            UpdateLivesUI();
+    }
+    public void Update()
     {
-        //if (Input.GetKeyUp(KeyCode.K))
-        //{
-        //    Debug.Log("k");
-        //    ReduceLives();
-        //}
-        livesText.SetText($"Lives: {lives}");
+        if (isCooldownActive)
+        {
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0)
+            {
+                cooldown = 35f; // Reset cooldown
+                isCooldownActive = false;
+            }
+        }
         if (lives <= 0)
         {
             GameOver();
         }
     }
-
-    public void ReduceLives()
+    public void ReduceLives(int damage)
     {
-        // This method will be called by SendMessage
-        lives--;
+        lives -= damage;
         Debug.Log($"Lives reduced to: {lives}");
         UpdateLivesUI();
 
-        if (lives <= 0)
-        {
-            GameOver();
-        }
+        
     }
 
     private void UpdateLivesUI()
     {
         if (livesText != null)
         {
-            livesText.SetText($"Lives: {lives}");
+            livesText.SetText(lives <= 0 ? "Lives: 0" : $"Lives: {lives}");
         }
     }
 
     private void GameOver()
     {
-        Debug.Log("Game Over!");
-        //GameOver screen pops off
-
+        if (gameOverUI != null)
+        {
+            script.TriggerGameOver();
+        }
+        else
+        {
+            Debug.LogError("GameOverScreenScript reference is not assigned.");
+        }
     }
 }

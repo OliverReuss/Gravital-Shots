@@ -7,6 +7,7 @@ public class StageSelection : MonoBehaviour
 {
     public int sceneIndex;
 
+    [System.Obsolete]
     public void SelectStage()
     {
         GameObject menuController = GameObject.Find("MenuController");
@@ -21,6 +22,7 @@ public class StageSelection : MonoBehaviour
             }
 
             SceneManager.LoadScene(sceneIndex);
+            SceneManager.UnloadSceneAsync("menu");
         }
     }
 }
