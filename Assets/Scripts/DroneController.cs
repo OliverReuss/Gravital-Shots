@@ -12,39 +12,35 @@ public class DroneController : MonoBehaviour
 
     private void Start()
     {
-        // Get the shot prefab
         shot = Resources.Load<GameObject>("Shot");
-
-        // Find the player in the scene and reference its transform
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update()
     {
-        // Update the array to always contain the current remaining enemies
+        // Update array to contain alive enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         bool enemyInRange = false;
 
-        // Check for each enemy if it is within range of the drone
+        // Check if enemy is in range
         foreach (GameObject enemy in enemies)
         {
-            // Calculate the distance between the enemy and the drone
+            // Distance to enemy
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            // Rotate towards the enemy if it is within range
+            // Rotate toward enemy
             if (distance <= range)
             {
                 enemyInRange = true;
 
-                // Calculate the rotation step
                 Vector3 directionToEnemy = enemy.transform.position - transform.position;
                 Quaternion targetRotation = Quaternion.LookRotation(directionToEnemy);
 
-                // Smoothly rotate towards the enemy
+                // Rotate towards enemy
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-                // Shoot if within range and able to shoot
+                // Shoot when in range and able to shoot
                 if (canShoot)
                 {
                     StartCoroutine(FireShot(enemy));
@@ -53,13 +49,10 @@ public class DroneController : MonoBehaviour
             }
         }
 
-        // If no enemy is within range, rotate back to face the player's forward direction
+        // Rotate back to players look directio
         if (!enemyInRange)
         {
-            // Calculate the rotation to face the player's forward direction
             Quaternion targetRotation = Quaternion.LookRotation(playerTransform.forward);
-
-            // Smoothly rotate towards the player's forward direction
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
@@ -68,12 +61,12 @@ public class DroneController : MonoBehaviour
     {
         canShoot = false;
 
-        // Instantiate a shot and set this game object as its origin and set the enemy as its target
+        // Instantiate shot set this game object as origin wiht enemy as target
         GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
         newShot.GetComponent<ShotScript>().SetOrigin(gameObject);
         newShot.GetComponent<ShotScript>().SetTarget(target);
 
-        // Wait for 2 seconds before allowing the next shot
+        // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
 
         canShoot = true;

@@ -15,9 +15,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        // Get the game controller to update the amount of enemies left when a shot destroys one
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
         shot = Resources.Load<GameObject>("Shot");
@@ -25,27 +23,27 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        // Calculate the direction to the player
+        // Direction to player
         Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
 
-        // Calculate a forward direction that is aligned with the current rotation
+        // Forward direction aligned with current rotation
         Vector3 forward = Vector3.ProjectOnPlane(directionToPlayer, transform.up).normalized;
 
-        // Align the enemy to face the player, keeping the current surface alignment
+        // Align to face player and keep current surface alignment
         if (forward.magnitude > 0.1f)
         {
             Quaternion lookRotation = Quaternion.LookRotation(forward, transform.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
 
-        // Move towards the player if they are out of range
+        // Move towards player out of range
         if (Vector3.Distance(transform.position, player.transform.position) < detectionRange && Vector3.Distance(transform.position, player.transform.position) > shootingRange)
         {
             transform.position += forward * speed * Time.deltaTime;
         }
         else
         {
-            // Stop the enemy from drifting away from the player
+            // Stop enemy from drifting away
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
@@ -63,12 +61,12 @@ public class EnemyController : MonoBehaviour
     {
         canShoot = false;
 
-        // Instantiate a shot and set this game object as its origin and set the enemy as its target
+        // Instantiate shot set game object as origin and enemy as target
         GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
         newShot.GetComponent<ShotScript>().SetOrigin(gameObject);
         newShot.GetComponent<ShotScript>().SetTarget(target);
 
-        // Wait for 2 seconds before allowing the next shot
+        // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
 
         canShoot = true;
@@ -80,12 +78,12 @@ public class EnemyController : MonoBehaviour
 
         if (movementController != null && movementController.isPoweredUp)
         {
-            // Instantly destroy the enemy when the player is powered up
+            // Destroy with one shot when player is powered up
             lives = 0;
         }
         else
         {
-            // Reduce the enemy's lives normally
+            // Reduce lives
             lives--;
         }
 

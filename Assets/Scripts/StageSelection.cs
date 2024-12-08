@@ -13,7 +13,7 @@ public class StageSelection : MonoBehaviour
         GameObject menuController = GameObject.Find("MenuController");
         MenuButtonRotation menuButtonRotation = menuController.GetComponent<MenuButtonRotation>();
 
-        // Check if button is at front (index 0) and was moved more than a certain time second ago
+        // Check button (cube) is at front and can be clicked
         if (menuButtonRotation.Cubes[0] == transform.parent.parent.gameObject && Time.time - menuButtonRotation.lastIndexChangeTime > 0.5f)
         {
             if (sceneIndex == 4)

@@ -14,7 +14,6 @@ public class Stage1EnemyScript : MonoBehaviour
 
     void Start()
     {
-        // Get the game controller to update the amount of enemies left when a shot destroys one
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
@@ -23,10 +22,10 @@ public class Stage1EnemyScript : MonoBehaviour
 
     void Update()
     {
-        // Calculate a forward direction that is aligned with the current rotation
+        // Calculate forward direction
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, transform.up).normalized;
 
-        // Always move forward
+        // Keep moving forward
         transform.position += forward * speed * Time.deltaTime;
 
         // Shooting
@@ -42,12 +41,12 @@ public class Stage1EnemyScript : MonoBehaviour
     {
         canShoot = false;
 
-        // Instantiate a shot and set this game object as its origin and set the enemy as its target
+        // Instantiate shot set game object as origin and enemy as target
         GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
         newShot.GetComponent<ShotScript>().SetOrigin(gameObject);
         newShot.GetComponent<ShotScript>().SetTarget(target);
 
-        // Wait for 2 seconds before allowing the next shot
+        // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
 
         canShoot = true;
@@ -59,12 +58,12 @@ public class Stage1EnemyScript : MonoBehaviour
 
         if (movementController != null && movementController.isPoweredUp)
         {
-            // Instantly destroy the enemy when the player is powered up
+            // Destroy enemy with one shot when player is powered up
             lives = 0;
         }
         else
         {
-            // Reduce the enemy's lives normally
+            // Reduce lives
             lives--;
         }
 
@@ -72,11 +71,6 @@ public class Stage1EnemyScript : MonoBehaviour
         {
             Destroy(gameObject);
             gameController.DecreaseEnemyCount();
-
-            //if (gameController.GetEnemyCount() == 0)
-            //{
-            //    scene changer
-            //}
         }
     }
 }

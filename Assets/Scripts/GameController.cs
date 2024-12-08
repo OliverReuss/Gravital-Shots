@@ -11,11 +11,9 @@ public class GameController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip explosionSound;
 
-    // Start is called before the first frame update
     void Start()
     {
         enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
-
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -25,12 +23,10 @@ public class GameController : MonoBehaviour
 
     public void DecreaseEnemyCount()
     {
-        // Decrease the count of enemies
         enemiesLeft--;
-
         PlayExplosionSound();
 
-        // If no enemies are left the player has won
+        // Player wins when no enemies left
         if (enemiesLeft == 0)
         {
             playerWin = true;
