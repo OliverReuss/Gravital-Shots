@@ -61,7 +61,6 @@ public class MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Handle player movement based on input values
         inputVector = movement.ReadValue<Vector2>();
         float moveInput = inputVector.y; // W/S for forward/backward
         float rotationInput = inputVector.x; // A/D for rotation
@@ -70,10 +69,9 @@ public class MovementController : MonoBehaviour
         if (rotationInput != 0)
         {
             float rotation = rotationInput * rotationSpeed * Time.fixedDeltaTime;
-            transform.Rotate(0, rotation, 0); // Rotate player on Y-axis
+            transform.Rotate(0, rotation, 0); // Rotate on Y-axis
         }
 
-        // Apply forward movement
         if (moveInput != 0)
         {
             Vector3 forwardMovement = transform.forward * moveInput * speed;
@@ -81,7 +79,7 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector3.zero; // Stop movement when no input is given
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -95,11 +93,11 @@ public class MovementController : MonoBehaviour
     {
         if (Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate; // Apply fire rate cooldown
+            nextFire = Time.time + fireRate; //fire rate cooldown
 
             // Instantiate the shot and set the player's position and rotation
             GameObject newShot = Instantiate(shot, transform.position, transform.rotation);
-            newShot.GetComponent<ShotScript>().SetOrigin(gameObject); // Set this game object as the shot's origin
+            newShot.GetComponent<ShotScript>().SetOrigin(gameObject);
             //Play shooting sound
             if (audioSource != null)
             {

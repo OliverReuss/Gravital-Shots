@@ -7,12 +7,12 @@ public class ShotScript : MonoBehaviour
 {
     public float lifetime = 2f;
     public float speed = 5f;
-    public float shotOffset = 0.5f;
+    public float shotOffset = 0.85f;
     public GameObject origin;
     private Vector3 direction;
     private Rigidbody rb;
     private MovementController movementController;
-    [SerializeField] private Lives lives;
+    //[SerializeField] private Lives lives;
 
     void Start()
     {
@@ -22,20 +22,18 @@ public class ShotScript : MonoBehaviour
         // Get the player movement script to update score
         movementController = GameObject.FindWithTag("Player").GetComponent<MovementController>();
 
-        if (lives == null)
-        {
-            Debug.LogError("LIVES NOT LOADED");
-        }
+        //if (origin.tag == "Player")
+        //{
+        //    Debug.LogError("LIVES NOT LOADED");
+        //}
 
-
-            // Shoot at the mouse position if the player instantiated the shot
-            if (origin.tag == "Player")
+        // Shoot at the mouse position if player shot
+        if (origin.tag == "Player")
         {
-            // Create a ray from the camera through the mouse position
+            // Create a ray from the camera to mouse position
             // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            // Determine the target point
             Vector3 targetPoint = ray.GetPoint(1000f);
 
             // Calculate the initial direction
@@ -54,11 +52,10 @@ public class ShotScript : MonoBehaviour
             direction = transform.forward;
         }
 
-        // Destroy the shot after a certain time
+        //destroy shot after a certain time
         Destroy(gameObject, lifetime);
     }
 
-    // Move the shot forward along the surface of the sphere
     void FixedUpdate()
     {
         // Cast a ray downward to find the surface normal
@@ -67,21 +64,20 @@ public class ShotScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, 5f))
         {
-            // Update direction to be tangent to the surface
             direction = Vector3.ProjectOnPlane(direction, hitInfo.normal).normalized;
 
-            // Move the shot forward
+            //move shot forward
             transform.position += direction * speed * Time.fixedDeltaTime;
         }
     }
 
-    void OnTriggerEnter(Collider other)
+void OnTriggerEnter(Collider other)
 {
-    if (origin != null && origin.CompareTag("Player") && other.CompareTag("Player"))
-    {
-        Debug.Log("Ignoring player's bullet");
-        return;
-    }
+    //if (origin != null && origin.CompareTag("Player") && other.CompareTag("Player"))
+    //{
+    //    Debug.Log("Ignoring player's bullet");
+    //    return;
+    //}
 
     // Player or drone shooting at enemy
     if (other.tag == "Enemy" && origin != null && (origin.tag == "Player" || origin.tag == "Drone"))
@@ -96,27 +92,32 @@ public class ShotScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Stage1")
         {
              var enemyController = other.GetComponent<Stage1EnemyScript>();
-             if (enemyController != null)
-             {
-                 enemyController.HitRecieved(origin);
-             }
+             enemyController.HitRecieved(origin);
+
+             //if (enemyController != null)
+             //{
+             //    enemyController.HitRecieved(origin);
+             //}
         }
         else if (SceneManager.GetActiveScene().name == "Stage2")
         {
             var enemyController = other.GetComponent<EnemyController>();
-            if (enemyController != null)
-            {
-                enemyController.HitRecieved(origin);
-            }
+            enemyController.HitRecieved(origin);
+
+            //if (enemyController != null)
+            //{
+            //    enemyController.HitRecieved(origin);
+            //}
         }
         else if (SceneManager.GetActiveScene().name == "Stage3")
         {
             // Check for StationaryEnemyController
             var stationaryEnemyController = other.GetComponent<StationaryEnemyController>();
-            if (stationaryEnemyController != null)
-            {
-                stationaryEnemyController.HitRecieved(origin);
-            }
+            stationaryEnemyController.HitRecieved(origin);
+            //if (stationaryEnemyController != null)
+            //{
+            //    stationaryEnemyController.HitRecieved(origin);
+            //}
         }
     }
 
@@ -126,16 +127,16 @@ public class ShotScript : MonoBehaviour
         // Destroy the shot
         Destroy(gameObject);
 
-            var playerLives = other.GetComponent<Lives>();
-            if (playerLives != null)
-            {
-                playerLives.ReduceLives(1);
-            }
-            else
-            {
-                Debug.LogError("Player does not have a Lives script!");
-            }
-        }
+        //var playerLives = other.GetComponent<Lives>();
+        //if (playerLives != null)
+        //{
+        //   playerLives.ReduceLives(1);
+        //}
+        //else
+        //{
+        // Debug.LogError("Player does not have a Lives script!");
+        //}
+    }
 }
 
     public void SetOrigin(GameObject o)

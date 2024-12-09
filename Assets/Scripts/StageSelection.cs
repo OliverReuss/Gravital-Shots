@@ -22,7 +22,7 @@ public class StageSelection : MonoBehaviour
             }
 
             SceneManager.LoadScene(sceneIndex);
-            SceneManager.UnloadSceneAsync("menu");
+            //SceneManager.UnloadSceneAsync("menu");
         }
     }
 }
