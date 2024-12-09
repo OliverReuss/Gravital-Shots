@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
     {
         playerInput = new PlayerInput();
 
-        // Set up the action to listen for the Escape key (or any other key you choose)
+        // Set up the action to listen for the Escape key (or any other key)
         pauseAction = playerInput.Player.Pause;
     }
 
@@ -37,25 +37,46 @@ public class HUD : MonoBehaviour
     private void AttachButtonListener(Button button, UnityEngine.Events.UnityAction action)
     {
         if (button != null)
+            Debug.Log("button localized");
             button.onClick.AddListener(action);
     }
 
     void Start()
     {
-        // Buttons initial visibility
         pauseMenuPanel.SetActive(false);
         pauseButton.SetActive(true);
 
-        // Button listeners
         Button pauseButtonComponent = pauseButton.GetComponent<Button>();
-        AttachButtonListener(pauseButtonComponent, Pause);
+        if (pauseButtonComponent)
+        {
+            AttachButtonListener(pauseButtonComponent, Pause);
+        }
+        else
+        {
+            Debug.LogError("Pause button not found.");
+        }
 
-        Button resumeButton = pauseMenuPanel.transform.Find("Resume").GetComponent<Button>();
-        AttachButtonListener(resumeButton, Resume);
+        Button resumeButton = pauseMenuPanel.transform.Find("Resume")?.GetComponent<Button>();
+        if (resumeButton)
+        {
+            AttachButtonListener(resumeButton, Resume);
+        }
+        else
+        {
+            Debug.LogError("Resume button not found or has no Button component.");
+        }
 
-        Button exitButton = pauseMenuPanel.transform.Find("Exit").GetComponent<Button>();
-        AttachButtonListener(exitButton, ExitToMainMenu);
+        Button exitButton = pauseMenuPanel.transform.Find("Exit")?.GetComponent<Button>();
+        if (exitButton)
+        {
+            AttachButtonListener(exitButton, ExitToMainMenu);
+        }
+        else
+        {
+            Debug.LogError("Exit button not found or has no Button.");
+        }
     }
+
 
     void Update()
     {
