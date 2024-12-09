@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ShowInstructions : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class ShowInstructions : MonoBehaviour
         // Check if button is at front (index 0) and was moved more than a certain time second ago
         if (menuButtonRotation.Cubes[0] == transform.parent.parent.gameObject && Time.time - menuButtonRotation.lastIndexChangeTime > 0.5f)
         {
-            // Logic for showing instructions goes here
-            Debug.Log("Show Instructions");
+            SceneManager.LoadScene("Instructions");
         }
     }
+
 }

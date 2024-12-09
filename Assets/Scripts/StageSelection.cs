@@ -25,4 +25,9 @@ public class StageSelection : MonoBehaviour
             //SceneManager.UnloadSceneAsync("menu");
         }
     }
+
+ //   switch (switch_on)
+	//{
+	//	default:
+	//}
 }
