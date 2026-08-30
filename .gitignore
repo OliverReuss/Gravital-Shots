@@ -1,35 +1,77 @@
-# Ignored Unity folders
-Library/
-Temp/
-Obj/
-Logs/
-Builds/
-UserSettings/
-Assets/AssetStoreTools*
+# =========================================================================
+# Unity-spezifische Ordner und Dateien
+# =========================================================================
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
 
-# Visual Studio and IDE-related files
+# =========================================================================
+# Asset Store Pakete & Autogeneriertes
+# =========================================================================
+/[Aa]ssets/AssetStoreTools*
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# =========================================================================
+# Addressables / Asset Pipeline Artifacts
+# =========================================================================
+/[Aa]ssets/AddressableAssetsData/*/*.bin*
+/[Aa]ssets/StreamingAssets/aa.meta
+/[Aa]ssets/StreamingAssets/aa/*
+
+# =========================================================================
+# Visual Studio / Visual Studio Code / Rider / IDEs
+# =========================================================================
 .vs/
-ExportedObj/
-.consulo/
+.vscode/
+.idea/
 *.csproj
 *.unityproj
 *.sln
 *.suo
-*.tmp
 *.user
 *.userprefs
 *.pidb
 *.booproj
 *.svd
 *.pdb
+*.mdb
 *.opendb
-.vsconfig
+*.VC.db
 
-# Unity3D specific meta and crash files
-*.pidb.meta
-*.pdb.meta
-sysinfo.txt
+# =========================================================================
+# OS-spezifische Dateien
+# =========================================================================
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
 
-# Build files
+# =========================================================================
+# Builds & Executables
+# =========================================================================
 *.apk
+*.aab
 *.unitypackage
+*.app
+
+# =========================================================================
+# Test / Coverage
+# =========================================================================
+TestResults/
+coverage/
+
+# =========================================================================
+# Secrets / Local Env (Niemals hochladen!)
+# =========================================================================
+.env
+.env.*
+*.pem
+*.p12
+*.key
