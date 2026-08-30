@@ -10,6 +10,10 @@
 /[Uu]ser[Ss]ettings/
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+/[Ll]ocal[Cc]ache/
+/[Dd]ebug/
+/[Dd]ebugProfile*/
+/[Rr]elease/
 
 # =========================================================================
 # Asset Store Pakete & Autogeneriertes
@@ -43,6 +47,12 @@
 *.mdb
 *.opendb
 *.VC.db
+*.tmp
+*.bak
+*.orig
+*.rej
+*.log
+*.cache
 
 # =========================================================================
 # OS-spezifische Dateien
