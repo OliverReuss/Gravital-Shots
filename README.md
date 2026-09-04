@@ -80,12 +80,28 @@ Use `WASD` to navigate around the gravity fields, aim with the mouse, and fire i
 
 ## Screenshots
 
-![Gravital Shots Logo](Assets/Resources/Project%20Logo.png)
-![Menu](docs/menu.png)
-![Gameplay](docs/stage_2.png)
-![Gameplay](docs/stage_1.png)
-![Gameplay](docs/stage_3.png)
-![Instructions](docs/instructions.png)
+## Screenshots
+
+<div align="center">
+  <img src="Assets/Resources/Project%20Logo.png" width="200" alt="Gravital Shots Logo">
+</div>
+
+<div align="center">
+  <img src="docs/menu.png" width="600" alt="Menu">
+</div>
+
+<div align="center">
+  <img src="docs/stage_1.png" width="600" alt="Gameplay - Stage 1">
+  <img src="docs/stage_2.png" width="600" alt="Gameplay - Stage 2">
+</div>
+
+<div align="center">
+  <img src="docs/stage_3.png" width="600" alt="Gameplay - Stage 3">
+</div>
+
+<div align="center">
+  <img src="docs/instructions.png" width="600" alt="Instructions">
+</div>
 
 ---
 
