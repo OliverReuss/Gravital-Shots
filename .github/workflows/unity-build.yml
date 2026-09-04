@@ -35,15 +35,12 @@ jobs:
           buildName: GravitalShots
           versioning: Custom
 
-      - name: Install Butler
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip
-          chmod +x butler
-          ./butler --version
-
-      - name: Upload WebGL build to itch.io
+      - name: Deploy to itch.io
+        uses: manleydev/butler-publish-itchio-action@v2
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
-        run: |
-          ./butler push build/WebGL/WebGL "${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:html"
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+        with:
+          directory: build/WebGL/WebGL
+          itch_user: ${{ secrets.ITCHIO_USERNAME }}
+          itch_game: ${{ secrets.ITCHIO_GAME }}
+          channel: html
