@@ -4,7 +4,7 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 [![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-red)](https://deltaforcer1.itch.io/gravital-shots)
 
-Space shooter demo featuring planetary gravity mechanics. Navigate your spaceship around geometric celestial bodies across 3 stages with unique enemy AI, power-ups, score tracking, and win/lose screens.
+Space shooter demo featuring planetary gravity mechanics. Navigate your spaceship around geometric celestial bodies across 3 stages with unique enemies, power-ups, score tracking, and win/lose screens.
 
 > **About this project:** Developed as a group project during a semester abroad in the **Computer Games Development** program in Ireland. Originally developed for PC, the project has been adapted and deployed as a **WebGL build hosted on itch.io**. Built with Unity (URP, Shader Graph, Input System).
 
@@ -19,7 +19,7 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 ## Features
 
 * **Gravity-Based Movement:** Control your spaceship around geometric 3D shapes with dynamic surface gravity.
-* **3 Game Stages:** Features distinct enemy behavior and AI patterns per stage.
+* **3 Game Stages:** Features distinct enemy behaviors per stage.
 * **Shooting & Upgrades:** Fluid shooting mechanics, power-ups, and custom particle effects.
 * **Audio & Interface:** Full UI powered by TextMesh Pro and integrated sound effects.
 
@@ -59,9 +59,13 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 
 | Action | Input |
 | :--- | :--- |
-| **Movement** | `WASD` / Gamepad (Input System) |
-| **Fire** | Left Mouse Button / Trigger |
+| **Move** | `W`, `A`, `S`, `D` |
+| **Aim** | Mouse cursor |
+| **Shoot** | Left Mouse Button |
 | **Pause** | `Esc` |
+| **Start Game** | Click the “BEGIN!!!” button |
+
+Use `WASD` to navigate around the gravity fields, aim with the mouse, and fire in the direction of your cursor. Press `Esc` at any time to pause the game.
 
 ---
 
@@ -76,8 +80,12 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 
 ## Screenshots
 
-![Gameplay](docs/gameplay.png)
+![Gravital Shots Logo](Assets/Resources/Project%20Logo.png)
 ![Menu](docs/menu.png)
+![Gameplay](docs/stage_2.png)
+![Gameplay](docs/stage_1.png)
+![Gameplay](docs/stage_3.png)
+![Instructions](docs/instructions.png)
 
 ---
 
