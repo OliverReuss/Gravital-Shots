@@ -46,4 +46,7 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
         run: |
-          ./butler push build/WebGL/WebGL "${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:html"
+          find build -maxdepth 4 -type d -iname '*WebGL*' -print
+          WEBGL_DIR="$(find build -maxdepth 4 -type d -iname '*WebGL*' | head -n 1)"
+          echo "Using WebGL dir: $WEBGL_DIR"
+          ./butler push "$WEBGL_DIR" "${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:html"
