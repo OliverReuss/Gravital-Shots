@@ -1,15 +1,14 @@
-name: Unity Build (WebGL)
+name: Unity WebGL Build + Itch.io Deploy
 
 on:
   push:
-    paths:
-      - 'Assets/**'
-      - 'ProjectSettings/**'
-      - '.github/workflows/**'
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,7 +23,7 @@ jobs:
           restore-keys: |
             Library-${{ runner.os }}-WebGL-
 
-      - name: Build project (WebGL)
+      - name: Build Unity project for WebGL
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -33,9 +32,17 @@ jobs:
         with:
           targetPlatform: WebGL
           unityVersion: 2022.3.45f1
+          buildName: GravitalShots
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: WebGL-Build
-          path: build/WebGL
+      - name: Install Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler --version
+
+      - name: Upload WebGL build to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
+        run: |
+          ./butler push build/WebGL/WebGL "${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:html"
