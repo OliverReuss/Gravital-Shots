@@ -27,31 +27,8 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 
 ## Play Online / Builds
 
-* **Browser (WebGL):** Play directly on [itch.io](https://deltaforcer1.itch.io/gravital-shots) *(adapted via CI/CD deployment)*.
+* **Browser (WebGL):** Play directly on itch.io
 * **PC Standalone:** Download or build locally for Windows / Linux / macOS.
-
----
-
-## Prerequisites (Editor Setup)
-
-* **Unity:** `2022.3.45f1 (LTS)`
-* **OS:** Windows / Linux / macOS — Editor via Unity Hub
-* **Recommended Packages:** Universal RP, TextMeshPro, Input System
-
----
-
-## Quickstart (Editor)
-
-1. **Unity Hub** → *Add* → Select the project folder.
-2. **Open Project** (`Unity 2022.3.45f1`).
-3. **Open Scene:** `Stage1.unity` (or `Menu`).
-4. Press **Play**.
-
-### Local Build (PC Standalone)
-
-1. **File** → **Build Settings** → Verify *Scenes in Build*.
-2. **Platform** → *PC, Mac & Linux Standalone* → **Build**.
-3. Run the executable output.
 
 ---
 
@@ -63,22 +40,10 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 | **Aim** | Mouse cursor |
 | **Shoot** | Left Mouse Button |
 | **Pause** | `Esc` |
-| **Start Game** | Click the “BEGIN!!!” button |
 
 Use `WASD` to navigate around the gravity fields, aim with the mouse, and fire in the direction of your cursor. Press `Esc` at any time to pause the game.
 
 ---
-
-## Architecture (Overview)
-
-* `GameController` — Stage management & enemy tracking
-* `MovementController` — Player input, gravity orientation & shooting
-* `ShotScript` — Bullet behavior & collision detection
-* `StageXEnemyScript` — Stage-specific enemy AI logic
-
----
-
-## Screenshots
 
 ## Screenshots
 
@@ -107,11 +72,12 @@ Use `WASD` to navigate around the gravity fields, aim with the mouse, and fire i
 
 ## License
 
-[MIT](LICENSE) — see `LICENSE` for details.
+MIT
 
 ---
 
-## Contact / Credits
+## Credits
 
-* **Author:** [Oliver Reuß](https://github.com/OliverReuss)
-* **Academic Context:** Developed as a group project during an Erasmus+ semester abroad in Games Development (Ireland).
+* **Author:** Oliver Reuß
+* **Developers:** Oliver Reuß, Jonathan Dellenbach, Daniel Algandro Mendioza Sermont
+* **Academic Context:** Developed as a group project during the 2024/25 winter semester for the 3D Graphics course in the Computer Games Development (B.Sc. Hons) program at SETU during an Erasmus+ semester abroad in Carlow, Ireland.
