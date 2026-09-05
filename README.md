@@ -3,6 +3,7 @@
 ![Unity 2022.3.45f1](https://img.shields.io/badge/unity-2022.3.45f1-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 [![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-red)](https://deltaforcer1.itch.io/gravital-shots)
+ [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-black?logo=github)](https://github.com/OliverReuss/Gravital-Shots)
 
 Space shooter demo featuring planetary gravity mechanics. Navigate your spaceship around geometric celestial bodies across 3 stages with unique enemies, power-ups, score tracking, and win/lose screens.
 
