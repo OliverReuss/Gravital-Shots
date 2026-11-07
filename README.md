@@ -3,33 +3,33 @@
 ![Unity 2022.3.45f1](https://img.shields.io/badge/unity-2022.3.45f1-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)
 [![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-red)](https://deltaforcer1.itch.io/gravital-shots)
- [![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-black?logo=github)](https://github.com/OliverReuss/Gravital-Shots)
+[![View on GitHub](https://img.shields.io/badge/View%20on-GitHub-black?logo=github)](https://github.com/OliverReuss/Gravital-Shots)
 
-Space shooter demo featuring planetary gravity mechanics. Navigate your spaceship around geometric celestial bodies across 3 stages with unique enemies, power-ups, score tracking, and win/lose screens.
+Gravital Shots is a short space shooter demo built around planetary gravity. Instead of flying across a flat plane, you navigate your ship around curved, geometric planetoids. The demo includes three stages with different enemy types, a power-up system, and score tracking.
 
-> **About this project:** Developed as a group project during a semester abroad in the **Computer Games Development** program in Ireland. Originally developed for PC, the project has been adapted and deployed as a **WebGL build hosted on itch.io**. Built with Unity (URP, Shader Graph, Input System).
+> Built in Unity (URP, Shader Graph, new Input System) as a student group project during my Erasmus semester at SETU Ireland. I recently adapted the original PC version into a WebGL build so it can be played directly in the browser on itch.io.
 
 ---
 
-## Key Gameplay Concept
+## The Core Mechanic
 
-Unlike traditional top-down or linear space shooters, **Gravital Shots** incorporates spherical and geometric gravity fields. Your spaceship orbits and navigates around geometric planetoids, requiring you to adapt your movement and aiming around 3D curved surfaces.
+Traditional top-down shooters operate on a flat 2D grid. In this project, movement is entirely tied to spherical and geometric gravity fields. You have to constantly adapt your aiming and dodging to the 3D curvature of the current object you are orbiting. 
 
 ---
 
 ## Features
 
-* **Gravity-Based Movement:** Control your spaceship around geometric 3D shapes with dynamic surface gravity.
-* **3 Game Stages:** Features distinct enemy behaviors per stage.
-* **Shooting & Upgrades:** Fluid shooting mechanics, power-ups, and custom particle effects.
-* **Audio & Interface:** Full UI powered by TextMesh Pro and integrated sound effects.
+* **Dynamic Surface Gravity:** Custom movement logic that keeps the player anchored to various 3D shapes.
+* **Three Stages:** Escalating difficulty with different enemy AI behaviors.
+* **Combat System:** Mouse-aimed shooting, custom particle effects, and item drops.
+* **UI and Polish:** A complete game loop (menus, win/lose states, scoring) built with TextMesh Pro, alongside integrated audio.
 
 ---
 
-## Play Online / Builds
+## Play the Game
 
-* **Browser (WebGL):** Play directly on itch.io
-* **PC Standalone:** Download or build locally for Windows / Linux / macOS.
+* **Browser (WebGL):** Play it directly on itch.io
+* **PC Standalone:** Clone the repo and build it locally for Windows, Linux, or macOS.
 
 ---
 
@@ -42,7 +42,7 @@ Unlike traditional top-down or linear space shooters, **Gravital Shots** incorpo
 | **Shoot** | Left Mouse Button |
 | **Pause** | `Esc` |
 
-Use `WASD` to navigate around the gravity fields, aim with the mouse, and fire in the direction of your cursor. Press `Esc` at any time to pause the game.
+Use WASD to steer along the planet's surface, aim with your mouse, and click to shoot. Hit Esc at any time to pause.
 
 ---
 
@@ -81,4 +81,4 @@ MIT
 
 * **Author:** Oliver Reuß
 * **Developers:** Oliver Reuß, Jonathan Dellenbach, Daniel Algandro Mendioza Sermont
-* **Academic Context:** Developed as a group project during the 2024/25 winter semester for the 3D Graphics course in the Computer Games Development (B.Sc. Hons) program at SETU during an Erasmus+ semester abroad in Carlow, Ireland.
+* **Academic Context:** Created during the 2024/25 winter semester for the 3D Graphics course (Computer Games Development B.Sc. Hons) during an Erasmus+ stay in Carlow, Ireland.
